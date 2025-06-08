@@ -1,0 +1,64 @@
+#REGISTRO EN RED
+
+AT+CPIN? //SIMCARD IS READY ?
+AT+CREG=1 //REGISTRARSE EN LA RED
+AT+CREG? //ESTADO DE REGISTRO
+
+//APN DE RED MOVIL (tcp/IP)
+AT+CSTT= "movistar.pe","movistar@datos","movistar"
+AT+CSTT="claro.pe","claro","claro"
+AT+CSTT="entel.pe","",""
+
+AT+CSQ //NIVEL DE SEÑAL
+AT+CSQ=?
+AT+CBC //BATERIA
+
+//LLAMADA TELEFONICA
++51923308048
+
+ATD +57XXXXXXX //INTERNACIONAL
+ATD 923308048  //LOCAL
+
+ATH  //COLGAR
+ATA  //RESPONDER LLAMADA
+
+//MANDAR MENSAJE TEXTO
+AT+CMGF = 1
+AT+CMGS = "+57XXXXXXXX" //Internacional
+AT+CMGS = "923308048"   //LOCAL
+
+#Enviar mensaje
+Hola !, estoy enviando un mensaje desde sim800. Vista nuestra pagina Umaker
+
+          //comando de finalizar, y envia mensaje
+
+//Si envia con serial print arduino 
+//0x0A = 10 //Salto de linea \n
+//0x0D = 13 //retorno de carro \r
+
+/////CONEXION GPRS///////////////////
+
+AT 
+AT+CPIN? //pregunta si el chip esta listo para funcionar
+AT+CFUN? 
+
+AT+CGATT=1   				//inicia conexion gprs
+AT+CSTT= "movistar.pe","movistar@datos","movistar"
+AT+CIICR                                //perfil de datos inalambricos 
+AT+CIFSR 
+
+/////////en caso falla AT+CIPSHUT   AT+CGATT=0
+
+AT+CIPSTART="TCP","dev.teubi.co",80
+AT+CIPSEND
+   GET /hola.php HTTP/1.1   [enter]
+   Host: dev.teubi.co       [enter]
+   [enter]
+
+
+AT+CIPCLOSE   //cerrar conexion
+
+///////////comandos prueba
+AT+IPR?   //pregunta el baud rate
+AT+CGMN   //indica el fabriante del modem
+AT+CSQ    //calidad de la señal

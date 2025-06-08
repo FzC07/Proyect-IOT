@@ -1,0 +1,24 @@
+AT+CPIN?
+AT+CREG=1
+AT+CREG?   
+
+//APN DE RED MOVIL (tcp/IP)
+AT+CSTT= "movistar.pe","movistar@datos","movistar"
+AT+CSTT= apn,username,pass
+AT+CSTT= "internet.comcel.com.co","comcel","comcel"
+AT+CSTT= "internet.wm.com","",""
+AT+CSTT= "internet.itelcel.com","webgpr","webgprs2002"
+AT+CSTT= "internet.claro.com.ec","",""
+
+AT+CBC //BATERIA
+
+/////CONEXION GPRS///////////////////
+
+AT 
+AT+CPIN? //pregunta si el chip esta listo para funcionar
+AT+CFUN? 
+
+AT+CGATT=1   						//inicia conexion gprs
+AT+CSTT= "movistar.pe","movistar@datos","movistar"	//Configura el APN
+AT+CIICR                                		//Activa la conexión GPR
+AT+CIFSR             
